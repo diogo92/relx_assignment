@@ -26,6 +26,10 @@ class NamingServiceTests {
 
 	@Test
 	void parseSingleName() {
+
+		//Test exception for single white space character as input
+		assertThrows(ArrayIndexOutOfBoundsException.class, () -> service.parseName(" "));
+
 		String name = "John Doe";
 		String result = service.parseName(name);
 		assertNotNull(result);
@@ -69,6 +73,12 @@ class NamingServiceTests {
 
 	@Test
 	void parseJoinedNames() {
+		//Test exception for single white space character as input
+		assertThrows(ArrayIndexOutOfBoundsException.class, () ->  service.parseJoinedNames(" "));
+
+		//Text exception for when one of the comma separated names is a single white space character
+		assertThrows(ArrayIndexOutOfBoundsException.class, () -> service.parseJoinedNames("John, "));
+
 		String joinedNames = "H-C Jensen, Peter Hans Kristensen, John Doe";
 		ArrayList<String> result = service.parseJoinedNames(joinedNames);
 		assertNotNull(result);
